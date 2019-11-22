@@ -29,7 +29,7 @@ namespace _Script.Action
         public override void LoadPlainValue(IValue plainValue)
         {
             var serialized = (Bencodex.Types.Dictionary)plainValue;
-            _count = (long) ((Integer) serialized["count"]).Value;
+            _count = (Integer)serialized["count"];
         }
 
         public override IAccountStateDelta Execute(IActionContext ctx)
@@ -58,7 +58,7 @@ namespace _Script.Action
         public override void Render(IActionContext ctx, IAccountStateDelta nextStates)
         {
             var agent = Agent.instance;
-            var count = (long)((Integer)nextStates.GetState(ctx.Signer));
+            var count = (Integer)nextStates.GetState(ctx.Signer);
             var rankingState = new RankingState(
                 (Bencodex.Types.Dictionary)nextStates.GetState(RankingState.Address)
             );

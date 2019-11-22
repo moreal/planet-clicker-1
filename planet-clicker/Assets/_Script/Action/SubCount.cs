@@ -72,7 +72,7 @@ namespace _Script.Action
         public override void Render(IActionContext ctx, IAccountStateDelta nextStates)
         {
             var agent = Agent.instance;
-            var count = (long)((Integer)nextStates.GetState(ctx.Signer));
+            var count = (Integer)nextStates.GetState(ctx.Signer);
             var rankingState = new RankingState(
                 (Bencodex.Types.Dictionary)nextStates.GetState(RankingState.Address)
             );

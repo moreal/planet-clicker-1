@@ -34,10 +34,10 @@ namespace _Script.State
             _map = new Dictionary<Address, long>();
         }
 
-        public RankingState(Bencodex.Types.Dictionary bdict) : base(Address)
+        public RankingState(Bencodex.Types.Dictionary dictionary) : base(Address)
         {
-            _map = bdict.ToDictionary(
-                pair => new Address(pair.Key.EncodeAsByteArray()),
+            _map = dictionary.ToDictionary(
+                pair => new Address((Bencodex.Types.Binary)pair.Key),
                 pair => (long)((Bencodex.Types.Integer)pair.Value)
             );
         }
@@ -58,8 +58,8 @@ namespace _Script.State
         {
             return new Bencodex.Types.Dictionary(
                 _map.Select(pair => new KeyValuePair<IKey, IValue>(
-                    new Bencodex.Types.Binary(pair.Key.ToByteArray()),
-                    new Bencodex.Types.Integer(pair.Value)
+                    (Bencodex.Types.Binary)pair.Key.ToByteArray(),
+                    (Bencodex.Types.Integer)pair.Value
                 ))
             );
         }
